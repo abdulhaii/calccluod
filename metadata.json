@@ -1,0 +1,6 @@
+{
+  "name": "Calculator",
+  "description": "تطبيق آلة حاسبة تفاعلي بتصميم عصري وأزرار ميكانيكية وشاشة رقمية كهرمانية",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

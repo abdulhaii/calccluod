@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@500;700;800&family=Tajawal:wght@500;700&display=swap");
+
+:root {
+  --charcoal: #1b1e23;
+  --panel: #23262c;
+  --lcd-bg: #0c0e0f;
+  --lcd-amber: #ffb400;
+  --lcd-amber-dim: #9a7424;
+  --key-digit: #2e3238;
+  --key-digit-text: #ecebe6;
+  --key-digit-hover: #383d44;
+  --key-func: #3a3f46;
+  --key-func-text: #d8d6cf;
+  --key-func-hover: #454b53;
+  --key-op: #d9622b;
+  --key-op-text: #1b1e23;
+  --key-op-hover: #e6723c;
+  --key-equals: #35c47c;
+  --key-equals-hover: #3dd689;
+  --shell: #14161a;
+}
+
+.calc-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 0%, #252a32 0%, var(--shell) 75%);
+  font-family: "Manrope", "Tajawal", system-ui, sans-serif;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.calc {
+  width: 100%;
+  max-width: 340px;
+  background: linear-gradient(165deg, var(--panel), var(--charcoal));
+  border-radius: 28px;
+  padding: 22px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+.calc__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding: 0 4px;
+}
+
+.calc__brand {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.calc__indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lcd-amber);
+  background: rgba(255, 180, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 180, 0, 0.2);
+}
+
+.calc__indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lcd-amber);
+  box-shadow: 0 0 6px var(--lcd-amber);
+}
+
+.calc__display {
+  background: var(--lcd-bg);
+  border-radius: 18px;
+  padding: 18px 18px 16px;
+  margin-bottom: 18px;
+  text-align: right;
+  direction: ltr;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 180, 0, 0.15);
+}
+
+.calc__display::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 180, 0, 0.03) 0px,
+    rgba(255, 180, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+.calc__expression {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+  color: var(--lcd-amber-dim);
+  min-height: 18px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calc__value {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--lcd-amber);
+  text-shadow: 0 0 16px rgba(255, 180, 0, 0.5);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 4px;
+  line-height: 1.15;
+}
+
+.calc__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.key {
+  border: none;
+  border-radius: 14px;
+  height: 60px;
+  font-family: "Manrope", "Tajawal", system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.08s ease, filter 0.08s ease, box-shadow 0.08s ease, background-color 0.1s ease;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:hover {
+  filter: brightness(1.06);
+}
+
+.key:active,
+.key.is-active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  filter: brightness(0.94);
+}
+
+.key-digit {
+  background: var(--key-digit);
+  color: var(--key-digit-text);
+}
+.key-digit:hover {
+  background: var(--key-digit-hover);
+}
+
+.key-func {
+  background: var(--key-func);
+  color: var(--key-func-text);
+  font-size: 17px;
+}
+.key-func:hover {
+  background: var(--key-func-hover);
+}
+
+.key-op {
+  background: var(--key-op);
+  color: var(--key-op-text);
+  font-size: 22px;
+}
+.key-op:hover {
+  background: var(--key-op-hover);
+}
+
+.key-op.is-selected {
+  background: #ffc278;
+  box-shadow: 0 0 0 2px var(--key-op), 0 4px 0 rgba(0, 0, 0, 0.4);
+  color: #121417;
+}
+
+.key-equals {
+  background: var(--key-equals);
+  color: #0c1f13;
+  font-size: 24px;
+}
+.key-equals:hover {
+  background: var(--key-equals-hover);
+}
+
+.calc-footer {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: center;
+  direction: rtl;
+}
+
+@media (max-width: 360px) {
+  .calc {
+    padding: 16px;
+    border-radius: 22px;
+  }
+  .key {
+    height: 52px;
+    font-size: 18px;
+    border-radius: 12px;
+  }
+  .calc__value {
+    font-size: 34px;
+  }
+}
